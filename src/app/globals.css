@@ -4,15 +4,19 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
+  --foreground-rgb-reverse: 255, 255, 255;
+  --background-start-rgb: 255, 255, 255;
   --background-end-rgb: 255, 255, 255;
+  --btn-color: #fff; 
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
+    --foreground-rgb-reverse: 0, 0, 0;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
+    --btn-color: black; 
   }
 }
 
@@ -24,4 +28,41 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+#readme {
+  fill: rgb(var(--foreground-rgb));
+}
+
+.social-icon{
+  fill: rgb(var(--foreground-rgb-reverse));
+}
+
+.social-icon-reverse{
+  fill: rgb(var(--foreground-rgb));
+}
+
+.main-btn{
+  background-color: rgb(var(--foreground-rgb));
+  color: var(--btn-color);
+}
+
+.footer-background{
+  background: rgb(var(--foreground-rgb));
+  min-height: 100vh;
+}
+ 
+.footer-50{
+  min-height: 50vh;
+  background: rgb(var(--foreground-rgb-reverse));
+}
+
+.footer{
+  background: rgb(var(--foreground-rgb));
+  color: rgb(var(--foreground-rgb-reverse));
+}
+
+.w-md-editor-text-pre > code,
+.w-md-editor-text-input {
+  font-size: 13px !important;
 }
