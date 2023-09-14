@@ -30,8 +30,12 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-#readme {
+#readme-black {
   fill: rgb(var(--foreground-rgb));
+}
+
+#readme-white {
+  fill: #07C5CE;
 }
 
 .social-icon{
@@ -65,4 +69,22 @@ body {
 .w-md-editor-text-pre > code,
 .w-md-editor-text-input {
   font-size: 13px !important;
+  font-family: 'Ubuntu', sans-serif;
+}
+.w-md-editor-text-input {
+  font-size: 20px;
+}
+.profile-section::-webkit-scrollbar {
+  width: 8px;
+}
+ 
+.profile-section::-webkit-scrollbar-track {
+  background-color: #ECECEC;
+  border-top-right-radius: 30px;
+}
+ 
+.profile-section::-webkit-scrollbar-thumb {
+  background-color: rgb(216, 213, 213);
+  outline: 0px solid slategrey;
+  border-top-right-radius: 30px;
 }
