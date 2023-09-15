@@ -11,7 +11,7 @@ function Footer() {
   return (
     <div className='footer py-4 w-full flex justify-center font-mono'>
       <span className={`${poppins.className}`}>
-        Created by <Link href="" className='hover:text-[#07C5CE]'>ravikunwar</Link></span>
+        Created by <Link href="" className='hover:text-[#07C5CE]'>ravikunwar (@rvikunwar)</Link></span>
     </div>
   )
 }
