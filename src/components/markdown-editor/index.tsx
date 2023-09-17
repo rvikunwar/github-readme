@@ -1,24 +1,32 @@
 import React, { useEffect, useState } from "react";
-import MDEditor from "@uiw/react-md-editor";
+import dynamic from 'next/dynamic';
+import '@uiw/react-markdown-editor/markdown-editor.css';
+import '@uiw/react-markdown-preview/markdown.css';
+import { NodeHtmlMarkdown } from "node-html-markdown";
 
-function MarkdownEditor(
+const MarkdownEditor = dynamic(
+  () => import("@uiw/react-markdown-editor").then((mod) => mod.default),
+  { ssr: false }
+);
+
+function Editor(
   {markdownValue}: {markdownValue: string|undefined|null}
 ) {
   const [value, setValue] = useState<string|undefined>("**Hello world!!!**");
   useEffect(()=>{
     if(markdownValue){
-      setValue(markdownValue)
+      setValue(NodeHtmlMarkdown.translate(markdownValue))
     }
   },[markdownValue])
 
   return (
-    <MDEditor 
+    <MarkdownEditor
       value={value} 
-      height={'100%'}
+      height={'100vh'}
       onChange={(e) => { 
         setValue(e)
       }} />
   );
 }
 
-export default MarkdownEditor;
+export default Editor;

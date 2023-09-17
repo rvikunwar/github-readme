@@ -51,6 +51,10 @@ body {
   color: var(--btn-color);
 }
 
+/* .md-editor{
+  height: 100%;
+} */
+
 .footer-background{
   background: rgb(var(--foreground-rgb));
   min-height: 100vh;
@@ -64,11 +68,6 @@ body {
 .footer{
   background: rgb(var(--foreground-rgb));
   color: rgb(var(--foreground-rgb-reverse));
-}
-
-.w-md-editor-text-pre > code,
-.w-md-editor-text-input {
-  font-size: 13px !important;
 }
 
 .profile-section::-webkit-scrollbar {
