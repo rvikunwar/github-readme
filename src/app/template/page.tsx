@@ -38,7 +38,6 @@ function Template() {
   },[])
 
   useEffect(()=>{
-    console.log(11111111111111)
     fetchMarkdownContent()
   },[fetchMarkdownContent])
 
@@ -49,7 +48,7 @@ function Template() {
       <div className="flex py-6 px-2" style={{ height: '90vh' }}>
         <div
           className="w-1/4 px-6 py-4 overflow-x-auto
-            overflow-scroll profile-section border rounded-lg">
+            overflow-scroll profile-section border rounded-lg dark:border-none">
           {content?.map((item, index) => (
             <Profile
               key={index}
@@ -63,7 +62,7 @@ function Template() {
             />
           ))}
         </div>
-        <div className="w-3/4 bg-white px-4">
+        <div className="w-3/4 px-4">
           <MarkdownEditor markdownValue={markdownValue} />
         </div>
       </div>

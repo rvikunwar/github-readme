@@ -12,7 +12,7 @@ const MarkdownEditor = dynamic(
 function Editor(
   {markdownValue}: {markdownValue: string|undefined|null}
 ) {
-  const [value, setValue] = useState<string|undefined>("**Hello world!!!**");
+  const [value, setValue] = useState<string|undefined>("**12d!!!**");
   useEffect(()=>{
     if(markdownValue){
       setValue(NodeHtmlMarkdown.translate(markdownValue))
@@ -23,6 +23,7 @@ function Editor(
     <MarkdownEditor
       value={value} 
       height={'100vh'}
+      visible={true}
       onChange={(e) => { 
         setValue(e)
       }} />

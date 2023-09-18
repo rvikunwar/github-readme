@@ -47,7 +47,7 @@ function Profile({
           <Eye/> 
           <span className="text-gray-300 text-sm">1223</span>
         </button> */}
-        <button className="flex items-center text-gray-900 font-normal text-xs mr-2">
+        <button className="flex items-center font-normal text-xs mr-2">
            <Copy/> 
            <span className="ml-1">Cloned 99</span>
         </button>
