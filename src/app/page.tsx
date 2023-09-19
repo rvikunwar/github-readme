@@ -2,7 +2,7 @@
 import Footer from "@/components/footer";
 import Github from "@/components/icons/Github";
 import Readme from "@/components/icons/Readme";
-import { Poppins, Space_Mono, Titan_One } from "next/font/google";
+import { Poppins, Titan_One } from "next/font/google";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 

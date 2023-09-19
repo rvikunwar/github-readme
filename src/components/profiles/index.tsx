@@ -3,6 +3,7 @@ import Github from "../icons/Github";
 import { Noto_Sans } from "next/font/google";
 import { stringToColor } from "@/utils";
 import Copy from "../icons/Copy";
+import Link from "next/link";
 // import Eye from "../icons/Eye";
 
 const natoSans = Noto_Sans({
@@ -39,7 +40,9 @@ function Profile({
         </h3>
 
         <button className="mr-2">
-          <Github dark={true} />
+          <Link href="" target="_blank">
+            <Github dark={true} />
+          </Link>
         </button>
       </div>
       <div className="flex items-center w-full">
@@ -47,14 +50,14 @@ function Profile({
           <Eye/> 
           <span className="text-gray-300 text-sm">1223</span>
         </button> */}
-        <button className="flex items-center font-normal text-xs mr-2">
+        {/* <button className="flex items-center font-normal text-xs mr-2">
            <Copy/> 
            <span className="ml-1">Cloned 99</span>
-        </button>
-        {/* <span style={ { background: stringToColor(category)}} 
+        </button> */}
+        <span style={ { background: stringToColor(category)}} 
           className={`self-end font-thin text-sm border px-2 rounded-md text-white ${natoSans.className}`}>
           {category}
-        </span> */}
+        </span>
       </div>
     </div>
   );

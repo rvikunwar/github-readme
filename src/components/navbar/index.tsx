@@ -4,7 +4,7 @@ import Link from "next/link";
 
 function Navbar() {
   return (
-    <div className="w-full py-2.5 px-4 navbar" style={{ height: '10vh' }}>
+    <div className="w-full flex align-center px-4 navbar" style={{ height: '10vh' }}>
       <span className="text-white pointer-events-none flex place-items-center 
         gap-2 p-8 lg:pointer-events-auto lg:p-0">
         <Link href="/" className="flex items-center">
