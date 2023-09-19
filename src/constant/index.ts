@@ -1,6 +1,8 @@
-const links = {
+export const links = {
   twitter: 'https://twitter.com/rvikunwar',
-  email: 'ravikunwar737@gmail.com'
+  email: 'ravikunwar737@gmail.com',
+  github: 'https://github.com/rvikunwar',
+  githubRepo: 'https://github.com/rvikunwar/github-readme'
 }
 
 export const projectDescription = `
