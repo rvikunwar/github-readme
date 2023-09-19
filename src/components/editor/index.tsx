@@ -8,7 +8,7 @@ function MarkdownEditor({
   
 }: {
   markdownValue: string | undefined;
-  setMarkdownValue: Dispatch<string| undefined>
+  setMarkdownValue: Dispatch<string>
 }) {
   const options = {
     minimap: {
@@ -26,7 +26,7 @@ function MarkdownEditor({
       theme="vs-dark"
       className="w-full rounded-sm border border-gray-500"
       onChange={(e) => {
-        setMarkdownValue(e);
+        if(e) setMarkdownValue(e);
       }}
       options={options}
     />

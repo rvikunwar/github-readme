@@ -1,4 +1,9 @@
+const links = {
+  twitter: 'https://twitter.com/rvikunwar',
+  email: 'ravikunwar737@gmail.com'
+}
 
+export const projectDescription = `
 <p align="center">
   <img src="/readme.svg" alt="GitHub README Project Logo" width="200">
 </p>
@@ -32,18 +37,18 @@ Feel free to browse and explore the content. If you find a README that you like,
 
 We encourage you to contribute to this project! If you have an excellent README that you'd like to share with the community or if you want to improve existing READMEs, follow these steps:
 
-* 🍴 Connect me on [Twitter](https://twitter.com/rvikunwar) or send me your read content on [Email](mailto:ravikunwar737@gmail.com).
+* 🍴 Connect me on [Twitter](${links.twitter}) or send me your read content on [Email](mailto:${links.email}).
 * 🌟 Or If you want to contribute to code then, Create a new branch with a descriptive name (e.g., 'feature/add-new-readme').
 * 📝 Then create a Firebase web project that utilizes the Firestore database. Within the project, establish a 'readme' collection, consisting of documents with the following fields: 'github,' 'markdown,' and 'username.' 
 Additionally, then create a '.env' file, incorporating the following Firebase configuration values:
-<code>
+
 NEXT_PUBLIC_FIREBASE_API_KEY=your-firebase-api-key
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your-firebase-auth-domain
 NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-firebase-project-id
 NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your-firebase-storage-bucket
 NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your-messaging-sender-id
 NEXT_PUBLIC_FIREBASE_APP_ID=your-firebase-app-id
-</code>
+
 Lastly, set 'NEXT_PUBLIC_FIRESTORE_README_COLLECTION' to 'readme'
 * 📦 Commit your changes with meaningful commit messages.
 * 🚀 Push your changes to your forked repository.
@@ -56,10 +61,11 @@ Your contributions will help make this project a valuable resource for other dev
 
 Have questions, suggestions, or just want to chat? Connect with us:
 
-- 📧 [Email](mailto:ravikunwar737@gmail.com)
-- 🐦 [Twitter](https://twitter.com/rvikunwar)
+- 📧 [Email](mailto:${links.email})
+- 🐦 [Twitter](${links.twitter})
 
 Let's collaborate and make READMEs even better!
 
 Happy README-ing! 🚀
 
+`

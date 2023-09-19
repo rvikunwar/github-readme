@@ -1,99 +1,115 @@
 "use client";
+import React, { useEffect, useState, useCallback } from "react";
+import Navbar from "@/components/navbar";
+import Profile from "@/components/profiles";
+import getAllDocument from "@/firebase/firestore";
+import MarkdownEditor from "@/components/editor";
+import MarkdownPreview from "@/components/preview";
+import Fullscreen from "@/components/icons/Fullscreen";
+import ExitScreen from "@/components/icons/ExitScreen";
+import { NodeHtmlMarkdown } from "node-html-markdown";
+import { Poppins } from "next/font/google";
+import useDeviceDetect from "@/hooks";
 import Footer from "@/components/footer";
-import Github from "@/components/icons/Github";
-import Readme from "@/components/icons/Readme";
-import { Poppins, Titan_One } from "next/font/google";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { projectDescription } from "@/constant";
 
+interface Content {
+  markdown: string;
+  github: string;
+  username: string;
+  category: string;
+}
 
-const poppins = Poppins({
-  weight: "300",
-  subsets: ["latin"],
-});
+function Template() {
+  const [markdownValue, setMarkdownValue] = useState<string>(projectDescription);
+  const [selected, setselected] = useState<string | null>();
+  const [content, setContent] = useState<Content[]>();
+  const [showDrawer, toggleDrawer] = useState(false);
 
-const titanOne = Titan_One({
-  weight: "400",
-  subsets: ["latin"],
-});
+  const fetchMarkdownContent = useCallback(async () => {
+    try {
+      const collectionName =
+        process.env.NEXT_PUBLIC_FIRESTORE_README_COLLECTION;
+      if (!collectionName) return;
+      const result = await getAllDocument(collectionName);
+      setContent(result);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
-export default function Home() {
-  const router = useRouter();
-  const navigateToTemplate = () => {
-    router.push("/template");
+  useEffect(() => {
+    fetchMarkdownContent();
+  }, [fetchMarkdownContent]);
+
+  const [fullScreen, setFullScreen] = useState(false);
+  const fullScreenHandler = () => {
+    setFullScreen((e) => !e);
   };
 
+  const contentHandler = (item: Content) => {
+    const translatedMarkdown = NodeHtmlMarkdown.translate(item.markdown);
+    setMarkdownValue(translatedMarkdown);
+    setselected(item.username);
+  };
+
+  const drawerClass = showDrawer ? "" : "-translate-x-full sm:transform-none";
+  const { isMobile } = useDeviceDetect();
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex p-24">
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center 
-          bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <span
-            className={`pointer-events-none flex place-items-center gap-2 p-8 
-            lg:pointer-events-auto lg:p-0 ${poppins.className} cursor-pointer`}
-          >
-            <Readme dark={true} /> Readme
-          </span>
-        </div>
-        <p
-          className={`fixed left-0 top-0 flex w-full justify-center 
-          border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 
-          pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 
-          dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border 
-          lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30 ${poppins.className} `}
+    <div className="w-full">
+      <Navbar
+        isDrawerOpen={showDrawer}
+        onMenuClick={() => {
+          toggleDrawer(!showDrawer);
+        }}
+      />
+      <div className="flex py-6 px-0 sm:px-2 w-full" style={{ height: "90vh" }}>
+        <div
+          className={`flex flex-col h-full absolute w-3/4 sm:w-1/4 border-none sm:border sm:rounded-lg dark:border-none shadow sm:shadow-none'} sm:relative p-2 bg-white dark:bg-black md:bg-transparent z-10 md:z-0
+            transform transition-transform duration-500 ease-in-out ${drawerClass}`}
         >
-          Get started by editing&nbsp;
-          <code className={`font-bold ${poppins.className}`}>
-            src/app/page.tsx
-          </code>
-        </p>
-      </div>
-
-      <div className="relative flex flex-col items-center justify-center px-24 mb-20">
-        <h3 className={`${titanOne.className} text-6xl`}>Readme templates</h3>
-        <p className={`text-center mt-4 md:px-52 ${poppins.className}`}>
-          Your gateway to effortlessly explore GitHub profiles and their
-          associated README files. Easily search, preview, and bookmark
-          profiles, saving you time and providing valuable insights into
-          projects and developers. Discover, connect, and stay informed with
-          GitHub README Explorer!
-        </p>
-        <div className={`mt-4 flex ${poppins.className}`}>
-          <button
-            onClick={navigateToTemplate}
-            className="text-sm rounded-md px-6 cursor-pointer 
-              mx-2 py-1 text-white bg-[#07C5CE] hover:scale-105 transition-all duration-500"
-          >
-            Get started
-          </button>
-          <button className="main-btn text-sm rounded-md px-6 cursor-pointer mx-2 flex 
-            items-center hover:scale-105 transition-all duration-500">
-            <Github /> <span>Github</span>
-          </button>
+          {content?.map((item, index) => (
+            <Profile
+              key={index}
+              name={item.username}
+              selected={selected}
+              category={item.category}
+              onClick={() => {
+                contentHandler(item);
+              }}
+            />
+          ))}
         </div>
-      </div>
-
-      <div className="w-full flex flex-col relative footer-background mt-16">
-        <Image
-          src="/sc1.webp"
-          alt="Readme"
-          width={0}
-          height={0}
-          sizes="100vw"
-          className="rounded-md"
-          style={{
-            width: "90%",
-            height: "auto",
-            position: "absolute",
-            right: "5%",
-            left: "5%",
-            top: 0,
-            bottom: 0,
-          }}
-        />
-        <div className="footer-50 w-full"></div>
+        <div className="w-full sm:w-3/4 px-4 flex flex-col md:flex-row ">
+          {!fullScreen && (
+            <div className="w-full sm:w-1/2 h-full order-2 sm:order-1">
+              <MarkdownEditor
+                markdownValue={markdownValue}
+                setMarkdownValue={setMarkdownValue}
+              />
+            </div>
+          )}
+          <div
+            className={`${
+              fullScreen ? "w-full mt-4 sm:mt-0 px-2" : "w-full sm:w-1/2 p-2 sm:p-6 sm:mx-4"
+            } h-full preview border border-gray-500 rounded-md preview
+             bg-white dark:bg-black order-1 
+              overflow-x-scroll md:overflow-x-auto relative mb-4`}
+          >
+            <span
+              className="absolute h-full right-4 top-2 cursor-pointer"
+              onClick={fullScreenHandler}
+            >
+              {!isMobile && (!fullScreen ? <Fullscreen /> : <ExitScreen />)}
+            </span>
+            <MarkdownPreview markdownValue={markdownValue} />
+          </div>
+        </div>
       </div>
       <Footer />
-    </main>
+    </div>
   );
 }
+
+export default Template;
