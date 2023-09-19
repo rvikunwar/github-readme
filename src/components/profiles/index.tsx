@@ -2,7 +2,6 @@ import React from "react";
 import Github from "../icons/Github";
 import { Noto_Sans } from "next/font/google";
 import { stringToColor } from "@/utils";
-import Copy from "../icons/Copy";
 import Link from "next/link";
 // import Eye from "../icons/Eye";
 
@@ -15,10 +14,12 @@ function Profile({
   name,
   category,
   onClick,
+  github,
   selected,
 }: {
   name: string;
   category: string;
+  github: string;
   onClick: () => void;
   selected: string | null | undefined;
 }) {
@@ -39,11 +40,11 @@ function Profile({
           {name}
         </h3>
 
-        <button className="mr-2">
-          <Link href="" target="_blank">
+        { github && <button className="mr-2">
+          <Link href={github} target="_blank">
             <Github dark={true} />
           </Link>
-        </button>
+        </button> }
       </div>
       <div className="flex items-center w-full">
         {/* <button className="flex items-center">
