@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="/readme.svg" alt="GitHub README Project Logo" width="200">
+  <img src="./public/read.svg" alt="GitHub README Project Logo" width="200">
 </p>
 
 <h1 align="center">Github README</h1>
