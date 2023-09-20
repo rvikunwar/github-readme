@@ -38,6 +38,10 @@ body {
   fill: #197FC4;
 }
 
+.h-screen-85{
+  height: 85vh;
+}
+
 .navbar{
   background-color: rgb(var(--foreground-rgb));
 }
