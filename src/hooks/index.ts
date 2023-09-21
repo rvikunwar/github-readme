@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 
+
+// checking responsiveness
 export default function useDeviceDetect() {
   const [isMobile, setMobile] = useState(false)
 
