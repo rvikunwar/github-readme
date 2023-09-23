@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 
-
 // checking responsiveness
 export default function useDeviceDetect() {
   const [isMobile, setMobile] = useState(false)
@@ -13,3 +12,19 @@ export default function useDeviceDetect() {
 
   return { isMobile }
 }
+
+// updates local data
+function useLocalStorage<T>(key: string): [T, React.Dispatch<React.SetStateAction<T>>] {
+
+  const storedValue = localStorage.getItem(key);
+  const [value, setValue] = useState<T>(storedValue ? JSON.parse(storedValue) : "");
+
+  useEffect(() => {
+    console.log(value, '099')
+    localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
+
+  return [value, setValue];
+}
+
+export { useLocalStorage };

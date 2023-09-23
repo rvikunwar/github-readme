@@ -5,6 +5,14 @@ export const links = {
   githubRepo: 'https://github.com/rvikunwar/github-readme'
 }
 
+export const yourSpace = {
+  username: "Your space",
+  category: "space",
+  markdown: ""
+}
+
+export const yourSpaceKey ="yourSpace";
+
 export const projectDescription = `
 <p align="center">
   <img src="/read.svg" alt="GitHub README Project Logo" width="200">

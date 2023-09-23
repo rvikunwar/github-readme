@@ -2,13 +2,13 @@
 import React, { Dispatch } from "react";
 import Editor from "@monaco-editor/react";
 
+
 function MarkdownEditor({
   markdownValue,
-  setMarkdownValue
-  
+  setMarkdownValue,
 }: {
   markdownValue: string | undefined;
-  setMarkdownValue: Dispatch<string>
+  setMarkdownValue: Dispatch<string>;
 }) {
   const options = {
     minimap: {
@@ -17,7 +17,6 @@ function MarkdownEditor({
     wordWrap: "on" as const,
     lineNumbers: "off" as const
   };
-
 
   return (
     <Editor

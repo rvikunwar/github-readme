@@ -8,9 +8,9 @@ import MarkdownPreview from "@/components/preview";
 import Fullscreen from "@/components/icons/Fullscreen";
 import ExitScreen from "@/components/icons/ExitScreen";
 import { NodeHtmlMarkdown } from "node-html-markdown";
-import useDeviceDetect from "@/hooks";
+import useDeviceDetect, { useLocalStorage } from "@/hooks";
 import Footer from "@/components/footer";
-import { projectDescription } from "@/constant";
+import { projectDescription, yourSpace, yourSpaceKey } from "@/constant";
 
 interface Content {
   markdown: string;
@@ -24,14 +24,20 @@ function Template() {
   const [selected, setselected] = useState<string | null>();
   const [content, setContent] = useState<Content[]>();
   const [showDrawer, toggleDrawer] = useState(false);
+  const  [inputValue, setInputValue] = useLocalStorage<string>(yourSpaceKey);
 
   const fetchMarkdownContent = useCallback(async () => {
     try {
       const collectionName =
         process.env.NEXT_PUBLIC_FIRESTORE_README_COLLECTION;
       if (!collectionName) return;
+      const markdownStoredData = inputValue;
+      const yourContent = {
+        ...yourSpace,
+        markdown: markdownStoredData ?? projectDescription
+      }
       const result = await getAllDocument(collectionName);
-      setContent(result);
+      setContent([yourContent, ...result]);
       console.log(result)
     } catch (error) {
       console.log(error);
@@ -48,13 +54,23 @@ function Template() {
   };
 
   const contentHandler = (item: Content) => {
-    const translatedMarkdown = NodeHtmlMarkdown.translate(item.markdown);
-    setMarkdownValue(translatedMarkdown);
     setselected(item.username);
+    if(item.username === yourSpace.username) {
+      setMarkdownValue(inputValue);
+    } else {
+      const translatedMarkdown = NodeHtmlMarkdown.translate(item.markdown);
+      setMarkdownValue(translatedMarkdown);
+    }
   };
 
   const drawerClass = showDrawer ? "" : "-translate-x-full sm:transform-none";
   const { isMobile } = useDeviceDetect();
+
+  useEffect(() => {
+    if(selected === yourSpace.username && markdownValue) {
+      setInputValue(markdownValue);
+    }
+  },[markdownValue])
 
   return (
     <div className="w-full">
