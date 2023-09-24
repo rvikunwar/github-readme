@@ -12,11 +12,11 @@ const poppins = Poppins({
 function Footer() {
   return (
     <div className="footer py-4 w-full flex justify-center font-mono">
-      <span className={`${poppins.className} flex items-center`}>
-        Created by{" "}
-        <Link href={links.github} className="hover:text-[#197FC4] flex mx-2">
-          {" "}
-          <Github /> <span>ravikunwar</span>
+      <span className={`${poppins.className} flex text-sm items-center`}>
+        Created by
+        <Link href={links.github} className="hover:text-[#197FC4] flex items-center mx-2">
+          <Github /> 
+          <span className="mx-2">ravikunwar</span>
         </Link>
       </span>
     </div>

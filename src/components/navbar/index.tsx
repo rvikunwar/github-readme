@@ -6,6 +6,12 @@ import Close from "../icons/Close";
 import Menu from "../icons/Menu";
 import Github from "../icons/Github";
 import { links } from "@/constant";
+import { Space_Grotesk } from "next/font/google";
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: "400",
+});
 
 function Navbar({
   onMenuClick,
@@ -27,7 +33,7 @@ function Navbar({
       >
         <Link href="/" className="flex items-center">
           <Readme size={"40px"} dark={true} />
-          <span className="logo ml-2">Readme</span>
+          <span className={`logo ml-2 ${spaceGrotesk.className}`}>Readme</span>
         </Link>
       </span>
 

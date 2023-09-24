@@ -11,12 +11,14 @@ const spaceGrotesk = Space_Grotesk({
 
 function Profile({
   name,
+  description,
   category,
   onClick,
   github,
   selected,
 }: {
   name: string;
+  description: string;
   category: string;
   github?: string;
   onClick: () => void;
@@ -30,7 +32,7 @@ function Profile({
       }}
       className={`rounded-md mb-4 border-box
         px-3 py-1 cursor-pointer border-solid border-2 ${
-          selected === name ? "border-[#07C5CE]" : "border-white"
+          selected === name ? "border-[#07C5CE]" : "border-white dark:border-gray-700 hover:border-[#07C5CE]"
         }`}
       onClick={onClick}
     >
@@ -40,9 +42,9 @@ function Profile({
         </h3>
       </div>
       <p className={`${spaceGrotesk.className} text-xs`}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui hic rem quae, quia nostrum reprehenderit
+        { description ?? 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui hic rem quae, quia nostrum reprehenderit' }
       </p>
-      <div className="flex items-center w-full">
+      <div className="flex items-center w-full mt-1">
         { github && <button className="mr-2">
           <Link href={github} target="_blank">
             <Github dark={true} />

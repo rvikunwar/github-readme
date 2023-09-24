@@ -15,6 +15,7 @@ interface Content {
   markdown: string;
   github?: string;
   username: string;
+  description: string;
   category: string;
 }
 
@@ -82,6 +83,7 @@ function Template() {
             <Profile
               key={index}
               name={item.username}
+              description={item.description}
               selected={selected}
               category={item.category}
               github={item.github}

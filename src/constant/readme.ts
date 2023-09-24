@@ -1,8 +1,9 @@
 export const profileReadme = [{
-    "username": "Othneil Drew",
-    "github": "https://github.com/othneildrew",
-    "category": "template",
-    "markdown": `
+    username: "Othneil Drew",
+    github: "https://github.com/othneildrew",
+    category: "template",
+    description: "A prototype readme template with all the required components.",
+    markdown: `
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a name='readme-top'></a>
 <!--
@@ -271,6 +272,7 @@ Use this space to list resources you find helpful and would like to give credit 
     username: "Raymo111",
     github: "https://github.com/Raymo111/Raymo111",
     category: "custom profile",
+    description: "A profile template with custom font and basic animation, perfect for your github readme portfolio.",
     markdown: `
 [<img src="https://raw.githubusercontent.com/Raymo111/Raymo111/master/intro.gif" alt="👋 Hi there! I'm (Raymo(111|nd Li)|https://raymond.li)" title="👋 Hi there! I'm (Raymo(111|nd Li)|https://raymond.li)"/>](https://raymond.li/)
 
@@ -380,6 +382,7 @@ Here are some ideas to get you started:
     username: "Teoxoy",
     github: "https://github.com/teoxoy",
     category: "basic",
+    description: "A basic template for displaying short and effective message and details.",
     markdown: `
 Joined Github **6** years ago.
 
@@ -403,6 +406,7 @@ Most used languages across my projects:
     username: "Ashley mavericks",
     github: "https://github.com/ashleymavericks/ashleymavericks/tree/main",
     category: "emo profile",
+    description: "A perfect portfolio readme with details shown in table and with some cool animated emojis.",
     markdown: `
 # 👨🏻‍💻 [Anurag Singh](https://anuragsingh.dev) [@ashleymavericks](https://anuragsingh.dev)
 
@@ -482,6 +486,7 @@ Here are some [🦜 party parrots](https://cultofthepartyparrot.com):
     username: "Anmol singh",
     github: "https://github.com/anmol098",
     category: "code",
+    description: "A coder portfolio readme with listed details about coding journey.",
     markdown: `
 <h2><img src="https://emojis.slackmojis.com/emojis/images/1531849430/4246/blob-sunglasses.gif?1531849430" width="30"/> नमस्ते (Namaste)🙏🏻, I'm Anmol Pratap Singh! <img src="https://media.giphy.com/media/12oufCB0MyZ1Go/giphy.gif" width="50"></h2>
 <img align='right' src="https://media.giphy.com/media/M9gbBd9nbDrOTu1Mqx/giphy.gif" width="230">
@@ -621,6 +626,7 @@ NOTE: Top languages does not indicate my skill level or anything like that. It i
     username: "Nanra",
     github: "https://github.com/Nanra",
     category: "profile",
+    description: "A profile template with details about contributions and coding journey.",
     markdown: `
 ### Hi there 👋 I'm Nanra a Permissioned Blockchain Architect & Engineer
 

@@ -8,6 +8,7 @@ export const links = {
 export const yourSpace = {
   username: "Your space",
   category: "your readme",
+  description: "Your space for creating your own perfect readme, you can use other listed templates for ideas and motivation.",
   markdown: ""
 }
 
@@ -31,7 +32,7 @@ export const projectDescription = `
 
 ## What is a README?
 
-A README (pronounced "read me") is a crucial document that accompanies your GitHub repository. It serves as an introduction and guide to your project, providing essential information to users, contributors, and potential collaborators. A well-crafted README can make a significant difference in how your project is perceived and adopted.
+A README (pronounced "read me") is a crucial document that accompanies your GitHub repository. It serves as an introduction and guide to your project, providing essential information to users, contributors, and potential collaborators.
 
 ## How to Use This Repository
 
@@ -48,18 +49,8 @@ Feel free to browse and explore the content. If you find a README that you like,
 We encourage you to contribute to this project! If you have an excellent README that you'd like to share with the community or if you want to improve existing READMEs, follow these steps:
 
 * 🍴 Connect me on [Twitter](${links.twitter}) or send me your read content on [Email](mailto:${links.email}).
-* 🌟 Or If you want to contribute to code then, Create a new branch with a descriptive name (e.g., 'feature/add-new-readme').
-* 📝 Then create a Firebase web project that utilizes the Firestore database. Within the project, establish a 'readme' collection, consisting of documents with the following fields: 'github,' 'markdown,' and 'username.' 
-Additionally, then create a '.env' file, incorporating the following Firebase configuration values:
-
-NEXT_PUBLIC_FIREBASE_API_KEY=your-firebase-api-key
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your-firebase-auth-domain
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-firebase-project-id
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your-firebase-storage-bucket
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your-messaging-sender-id
-NEXT_PUBLIC_FIREBASE_APP_ID=your-firebase-app-id
-
-Lastly, set 'NEXT_PUBLIC_FIRESTORE_README_COLLECTION' to 'readme'
+* 🌟 Or If you want to contribute to code then, Clone the repo and the create a new branch with a descriptive name (e.g., 'feature/add-new-readme').
+* 📝 Add your changes and then
 * 📦 Commit your changes with meaningful commit messages.
 * 🚀 Push your changes to your forked repository.
 * 🔄 Create a pull request (PR) to submit your contribution.
