@@ -1,11 +1,10 @@
 import React from "react";
 import Github from "../icons/Github";
-import { Noto_Sans } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import { stringToColor } from "@/utils";
 import Link from "next/link";
-// import Eye from "../icons/Eye";
 
-const natoSans = Noto_Sans({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   weight: "400",
 });
@@ -19,7 +18,7 @@ function Profile({
 }: {
   name: string;
   category: string;
-  github: string;
+  github?: string;
   onClick: () => void;
   selected: string | null | undefined;
 }) {
@@ -36,27 +35,22 @@ function Profile({
       onClick={onClick}
     >
       <div className="flex justify-between">
-        <h3 className={`font-semibold text-sm ${natoSans.className}`}>
+        <h3 className={`font-semibold text-sm ${spaceGrotesk.className}`}>
           {name}
         </h3>
-
+      </div>
+      <p className={`${spaceGrotesk.className} text-xs`}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui hic rem quae, quia nostrum reprehenderit
+      </p>
+      <div className="flex items-center w-full">
         { github && <button className="mr-2">
           <Link href={github} target="_blank">
             <Github dark={true} />
           </Link>
         </button> }
-      </div>
-      <div className="flex items-center w-full">
-        {/* <button className="flex items-center">
-          <Eye/> 
-          <span className="text-gray-300 text-sm">1223</span>
-        </button> */}
-        {/* <button className="flex items-center font-normal text-xs mr-2">
-           <Copy/> 
-           <span className="ml-1">Cloned 99</span>
-        </button> */}
         <span style={ { background: stringToColor(category)}} 
-          className={`self-end font-thin text-sm border px-2 rounded-md text-white ${natoSans.className}`}>
+          className={`font-thin text-xs px-2 text-gray-100
+          rounded-md ${spaceGrotesk.className} outline-none`}>
           {category}
         </span>
       </div>

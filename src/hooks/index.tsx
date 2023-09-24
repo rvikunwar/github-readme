@@ -20,7 +20,6 @@ function useLocalStorage<T>(key: string): [T, React.Dispatch<React.SetStateActio
   const [value, setValue] = useState<T>(storedValue ? JSON.parse(storedValue) : "");
 
   useEffect(() => {
-    console.log(value, '099')
     localStorage.setItem(key, JSON.stringify(value));
   }, [key, value]);
 

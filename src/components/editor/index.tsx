@@ -18,13 +18,16 @@ function MarkdownEditor({
     lineNumbers: "off" as const
   };
 
+  const a = "AAA`ssss`"
+
   return (
     <Editor
-      defaultLanguage="markdown"
+      language="markdown"
       value={markdownValue}
       theme="vs-dark"
       className="w-full rounded-sm border border-gray-500"
       onChange={(e) => {
+        console.log(e, '111')
         if(e) setMarkdownValue(e);
       }}
       options={options}

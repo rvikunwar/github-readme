@@ -1,52 +1,30 @@
 "use client";
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "@/components/navbar";
 import Profile from "@/components/profiles";
-import getAllDocument from "@/firebase/firestore";
 import MarkdownEditor from "@/components/editor";
 import MarkdownPreview from "@/components/preview";
 import Fullscreen from "@/components/icons/Fullscreen";
 import ExitScreen from "@/components/icons/ExitScreen";
-import { NodeHtmlMarkdown } from "node-html-markdown";
 import useDeviceDetect, { useLocalStorage } from "@/hooks";
 import Footer from "@/components/footer";
 import { projectDescription, yourSpace, yourSpaceKey } from "@/constant";
+import { profileReadme } from "@/constant/readme";
 
 interface Content {
   markdown: string;
-  github: string;
+  github?: string;
   username: string;
   category: string;
 }
 
 function Template() {
-  const [markdownValue, setMarkdownValue] = useState<string>(projectDescription);
+  const [markdownValue, setMarkdownValue] =
+    useState<string>(projectDescription);
   const [selected, setselected] = useState<string | null>();
   const [content, setContent] = useState<Content[]>();
   const [showDrawer, toggleDrawer] = useState(false);
-  const  [inputValue, setInputValue] = useLocalStorage<string>(yourSpaceKey);
-
-  const fetchMarkdownContent = useCallback(async () => {
-    try {
-      const collectionName =
-        process.env.NEXT_PUBLIC_FIRESTORE_README_COLLECTION;
-      if (!collectionName) return;
-      const markdownStoredData = inputValue;
-      const yourContent = {
-        ...yourSpace,
-        markdown: markdownStoredData ?? projectDescription
-      }
-      const result = await getAllDocument(collectionName);
-      setContent([yourContent, ...result]);
-      console.log(result)
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchMarkdownContent();
-  }, [fetchMarkdownContent]);
+  const [inputValue, setInputValue] = useLocalStorage<string>(yourSpaceKey);
 
   const [fullScreen, setFullScreen] = useState(false);
   const fullScreenHandler = () => {
@@ -55,11 +33,10 @@ function Template() {
 
   const contentHandler = (item: Content) => {
     setselected(item.username);
-    if(item.username === yourSpace.username) {
+    if (item.username === yourSpace.username) {
       setMarkdownValue(inputValue);
     } else {
-      const translatedMarkdown = NodeHtmlMarkdown.translate(item.markdown);
-      setMarkdownValue(translatedMarkdown);
+      setMarkdownValue(item.markdown);
     }
   };
 
@@ -67,10 +44,21 @@ function Template() {
   const { isMobile } = useDeviceDetect();
 
   useEffect(() => {
-    if(selected === yourSpace.username && markdownValue) {
+    const markdownStoredData = inputValue;
+    const yourContent = {
+      ...yourSpace,
+      markdown: markdownStoredData ?? projectDescription,
+    };
+    setContent([yourContent, ...profileReadme]);
+    setselected(yourSpace.username);
+    setMarkdownValue(yourContent.markdown);
+  }, []);
+
+  useEffect(() => {
+    if (selected === yourSpace.username && markdownValue) {
       setInputValue(markdownValue);
     }
-  },[markdownValue])
+  }, [markdownValue]);
 
   return (
     <div className="w-full">
@@ -80,9 +68,12 @@ function Template() {
           toggleDrawer(!showDrawer);
         }}
       />
-      <div className="flex py-6 px-0 sm:px-2 w-full" style={{ minHeight: "90vh" }}>
+      <div
+        className="flex py-6 px-0 sm:px-2 w-full"
+        style={{ minHeight: "90vh" }}
+      >
         <div
-          className={`flex flex-col sm:h-screen h-screen-85 absolute w-3/4 sm:w-1/4 border-none 
+          className={`flex flex-col h-screen-85 absolute overflow-y-scroll w-3/4 sm:w-1/4 lg:w-1/5 border-none 
             sm:border sm:rounded-lg dark:border-none shadow sm:shadow-none'} sm:relative 
             p-2 bg-white dark:bg-black md:bg-transparent z-10 md:z-0
             transform transition-transform duration-500 ease-in-out ${drawerClass}`}
@@ -100,7 +91,7 @@ function Template() {
             />
           ))}
         </div>
-        <div className="w-full sm:w-3/4 px-4 flex flex-col md:flex-row ">
+        <div className="w-full sm:w-3/4 lg:w-4/5 px-4 flex flex-col md:flex-row ">
           {!fullScreen && (
             <div className="w-full sm:w-1/2 h-screen-85 order-2 sm:order-1">
               <MarkdownEditor

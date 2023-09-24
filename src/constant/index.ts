@@ -7,7 +7,7 @@ export const links = {
 
 export const yourSpace = {
   username: "Your space",
-  category: "space",
+  category: "your readme",
   markdown: ""
 }
 

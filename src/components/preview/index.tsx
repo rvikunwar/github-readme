@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from 'rehype-highlight'
 import rehypeRaw from 'rehype-raw'
@@ -21,8 +21,8 @@ function MarkdownPreview({
     <ReactMarkdown
       rehypePlugins={rehypePlugins}
       remarkPlugins={remarkPlugins}
-    >
-      {markdownValue ? markdownValue : ""}
+      >
+      {markdownValue ? markdownValue: ""}
     </ReactMarkdown>
   );
 }
