@@ -11,7 +11,7 @@ function Fullscreen() {
     >
       <path
         d="m262.4445 4039h-6.444v2h6v6h2v-7.045-.955zm-.444 18h-6v2h6.444 1.556v-3.045-4.955h-2zm-16-6h-2v4.955 3.045h2.444 5.556v-2h-6zm0-4h-2v-7.045-.955h2.444 5.556v2h-6z"
-        fill-rule="evenodd"
+        fillRule="evenodd"
         transform="translate(-244 -4039)"
       />
     </svg>

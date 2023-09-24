@@ -53,13 +53,13 @@ function Template() {
     setContent([yourContent, ...profileReadme]);
     setselected(yourSpace.username);
     setMarkdownValue(yourContent.markdown);
-  }, []);
+  }, [inputValue]);
 
   useEffect(() => {
     if (selected === yourSpace.username && markdownValue) {
       setInputValue(markdownValue);
     }
-  }, [markdownValue]);
+  }, [markdownValue, selected, setInputValue]);
 
   return (
     <div className="w-full">

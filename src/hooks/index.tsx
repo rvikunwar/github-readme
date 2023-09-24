@@ -1,3 +1,4 @@
+"use client"
 import { useState, useEffect } from 'react'
 
 // checking responsiveness
@@ -16,12 +17,16 @@ export default function useDeviceDetect() {
 // updates local data
 function useLocalStorage<T>(key: string): [T, React.Dispatch<React.SetStateAction<T>>] {
 
-  const storedValue = localStorage.getItem(key);
-  const [value, setValue] = useState<T>(storedValue ? JSON.parse(storedValue) : "");
+  const isClient = typeof window !== 'undefined';
+
+  const storedValue = isClient ? localStorage.getItem(key): null;
+  const [value, setValue] = useState<T>(isClient && storedValue? JSON.parse(storedValue) : "");
 
   useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value));
-  }, [key, value]);
+    if(isClient){
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+  }, [isClient, key, value]);
 
   return [value, setValue];
 }
