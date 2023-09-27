@@ -10,6 +10,7 @@ import useDeviceDetect, { useLocalStorage } from "@/hooks";
 import Footer from "@/components/footer";
 import { projectDescription, yourSpace, yourSpaceKey } from "@/constant";
 import { profileReadme } from "@/constant/readme";
+import Loader from "@/components/loader";
 
 interface Content {
   markdown: string;
@@ -48,7 +49,8 @@ function Template() {
     const markdownStoredData = inputValue;
     const yourContent = {
       ...yourSpace,
-      markdown: markdownStoredData ?? projectDescription,
+      markdown: !markdownStoredData || markdownStoredData === "" ? 
+        projectDescription: markdownStoredData,
     };
     setContent([yourContent, ...profileReadme]);
     setselected(yourSpace.username);
@@ -61,8 +63,13 @@ function Template() {
     }
   }, [markdownValue, selected, setInputValue]);
 
+  const [loader,setLoader] =  useState(true)
+  const onLoaderClose = () => {
+    setLoader(false)
+  }
   return (
     <div className="w-full">
+      {loader && <Loader onClickHandler={onLoaderClose}/> }
       <Navbar
         isDrawerOpen={showDrawer}
         onMenuClick={() => {
