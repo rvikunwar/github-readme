@@ -3,6 +3,7 @@ import Github from "../icons/Github";
 import { Space_Grotesk } from "next/font/google";
 import { stringToColor } from "@/utils";
 import Link from "next/link";
+import { yourSpace } from "@/constant";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -30,7 +31,7 @@ function Profile({
         boxShadow:
           "rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px",
       }}
-      className={`rounded-md mb-4 border-box
+      className={`rounded-md mb-4 border-box ${name === yourSpace.username && 'bg-black text-white py-3'}
         px-3 py-1 cursor-pointer border-solid border-2 ${
           selected === name ? "border-[#07C5CE]" : "border-white dark:border-gray-700 hover:border-[#07C5CE]"
         }`}

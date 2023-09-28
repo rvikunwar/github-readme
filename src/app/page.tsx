@@ -27,6 +27,7 @@ function Template() {
   const [content, setContent] = useState<Content[]>();
   const [showDrawer, toggleDrawer] = useState(false);
   const [inputValue, setInputValue] = useLocalStorage<string>(yourSpaceKey);
+  const [loader,setLoader] =  useState(true)
 
   const [fullScreen, setFullScreen] = useState(false);
   const fullScreenHandler = () => {
@@ -63,7 +64,6 @@ function Template() {
     }
   }, [markdownValue, selected, setInputValue]);
 
-  const [loader,setLoader] =  useState(true)
   const onLoaderClose = () => {
     setLoader(false)
   }

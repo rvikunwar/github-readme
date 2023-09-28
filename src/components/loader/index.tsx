@@ -1,13 +1,7 @@
 import { links } from "@/constant";
-import { Russo_One, Shadows_Into_Light, Space_Grotesk } from "next/font/google";
+import { Russo_One, Space_Grotesk } from "next/font/google";
 import Link from "next/link";
 import React from "react";
-// import Particles from "./components/particles";
-
-const navigation = [
-  { name: "", href: "/projects" },
-  { name: "Contact", href: "/contact" },
-];
 
 const russoOne = Russo_One({
   subsets: ["latin"],

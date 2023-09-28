@@ -14,6 +14,8 @@
   <a href="#connect-with-us">Connect with Us</a>
 </p>
 
+![Github readme](./public/github_readme.gif)
+
 ## What is a README?
 
 A README (pronounced "read me") is a crucial document that accompanies your GitHub repository. It serves as an introduction and guide to your project, providing essential information to users, contributors, and potential collaborators.
