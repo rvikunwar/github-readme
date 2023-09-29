@@ -11,6 +11,7 @@ import Footer from "@/components/footer";
 import { projectDescription, yourSpace, yourSpaceKey } from "@/constant";
 import { profileReadme } from "@/constant/readme";
 import Loader from "@/components/loader";
+import Searchbar from "@/components/searchbar";
 
 interface Content {
   markdown: string;
@@ -27,7 +28,8 @@ function Template() {
   const [content, setContent] = useState<Content[]>();
   const [showDrawer, toggleDrawer] = useState(false);
   const [inputValue, setInputValue] = useLocalStorage<string>(yourSpaceKey);
-  const [loader,setLoader] =  useState(true)
+  const [loader, setLoader] = useState(true);
+  const [userContent, setUserContent] = useState<Content>();
 
   const [fullScreen, setFullScreen] = useState(false);
   const fullScreenHandler = () => {
@@ -50,10 +52,13 @@ function Template() {
     const markdownStoredData = inputValue;
     const yourContent = {
       ...yourSpace,
-      markdown: !markdownStoredData || markdownStoredData === "" ? 
-        projectDescription: markdownStoredData,
+      markdown:
+        !markdownStoredData || markdownStoredData === ""
+          ? projectDescription
+          : markdownStoredData,
     };
-    setContent([yourContent, ...profileReadme]);
+    setUserContent(yourContent);
+    setContent([...profileReadme]);
     setselected(yourSpace.username);
     setMarkdownValue(yourContent.markdown);
   }, [inputValue]);
@@ -65,11 +70,30 @@ function Template() {
   }, [markdownValue, selected, setInputValue]);
 
   const onLoaderClose = () => {
-    setLoader(false)
+    setLoader(false);
+  };
+
+  function searchContent(searchTerm: string): Content[] {
+    searchTerm = searchTerm.toLowerCase(); // Convert the search term to lowercase for case-insensitive search
+  
+    return profileReadme.filter((content) => {
+      const { username, description, category } = content;
+        return (
+        username.toLowerCase().includes(searchTerm) ||
+        description.toLowerCase().includes(searchTerm) ||
+        category.toLowerCase().includes(searchTerm)
+      );
+    });
   }
+
+  const onSearchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setContent(searchContent(value));
+  }
+
   return (
     <div className="w-full">
-      {loader && <Loader onClickHandler={onLoaderClose}/> }
+      {loader && <Loader onClickHandler={onLoaderClose} />}
       <Navbar
         isDrawerOpen={showDrawer}
         onMenuClick={() => {
@@ -86,6 +110,19 @@ function Template() {
             p-2 bg-white dark:bg-black md:bg-transparent z-10 md:z-0
             transform transition-transform duration-500 ease-in-out ${drawerClass}`}
         >
+          {userContent && <Profile
+            name={userContent.username}
+            description={userContent.description}
+            selected={selected}
+            category={userContent.category}
+            github={userContent.github}
+            onClick={() => {
+              contentHandler(userContent);
+            }}
+          />}
+
+          <Searchbar
+            onSearchHandler={onSearchHandler}/>
           {content?.map((item, index) => (
             <Profile
               key={index}
